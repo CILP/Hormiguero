@@ -3,12 +3,26 @@ var contexto = null;
 var hormiga = null;
 var fondoMapa = null; 
 var colorJugador = null; 
+var cursor = null;
+var click = null;
+var hormigados = null;
 var x = null ,
     y = null;
     
 var rectangulosPintados = null;
 
 window.addEventListener('load', init, false);
+
+document.onmousemove = function(e) {
+    cursor.x = e.pageX;
+    cursor.y = e.pageY;
+}
+
+document.onmouseup = function(e) {
+    e = e || window.event;
+    var button = e.which || e.button;
+    click = button == 1;
+}
 
 function repaint() {
     window.requestAnimationFrame(repaint);
@@ -24,6 +38,26 @@ function repaint() {
         contexto.fillRect(rectangulosPintados[i].x, rectangulosPintados[i].y, rectangulosPintados[i].ancho, rectangulosPintados[i].alto);
     }
     hormiga.pintar(contexto, colorJugador);
+    
+    contexto.fillStyle = "#f00";
+    contexto.fillRect(cursor.x -  16, cursor.y - 16, 32, 32);
+    
+    /*
+    if (click){
+        console.log("Click");
+        click = false;
+    }
+    
+    if (hormigados){
+        hormigados.setDireccion(random(39));
+        hormigados.mover();
+        //hormigados.changeColor();
+        hormiga.pintar(contexto, colorJugador);
+    }
+    else {
+        hormigados = new Hormiga('Carlos', cursor.x, cursor.y, 32, 32);
+    }*/
+    
 }
 
 function run() {
@@ -31,6 +65,9 @@ function run() {
 }
 
 function init() {
+    cursor = { x : 0, y : 0 };
+    click = false;
+    
     canvas = document.getElementById('canvas');
     contexto = canvas.getContext('2d');
 

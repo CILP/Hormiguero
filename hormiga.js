@@ -62,7 +62,8 @@ Hormiga.prototype.changeColor = function() {
         }
         else {
             // Se actualiza
-            var colorAntiguo = rectangulosPintados[indiceDuplicado].color;7
+            // Comentar el contenido de este bloque para prevenir la actualizacion
+            var colorAntiguo = rectangulosPintados[indiceDuplicado].color;
             
             if (colorAntiguo === "#FFF"){
                 rectangulosPintados[indiceDuplicado] = new Rectangulo(this.x, this.y, 32, 32, new Color('0', '0', '0'));
@@ -75,8 +76,6 @@ Hormiga.prototype.changeColor = function() {
     else {
         rectangulosPintados = [];
     }
-    
-    
 };
 
 Hormiga.prototype.mover = function() {
