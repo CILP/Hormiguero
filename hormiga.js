@@ -38,7 +38,7 @@ Hormiga.prototype.colision = function (hormiga) {
     return (
         this.x < hormiga.x + hormiga.ancho &&
         this.x + this.ancho > hormiga.x &&
-        this.y < hormiga.x + hormiga.alto &&
+        this.y < hormiga.y + hormiga.alto &&
         this.y + this.alto > hormiga.y
     );
 };
@@ -63,6 +63,7 @@ Hormiga.prototype.changeColor = function() {
         else {
             // Se actualiza
             // Comentar el contenido de este bloque para prevenir la actualizacion
+            /*
             var colorAntiguo = rectangulosPintados[indiceDuplicado].color;
             
             if (colorAntiguo === "#FFF"){
@@ -70,7 +71,7 @@ Hormiga.prototype.changeColor = function() {
             }
             else {
                 rectangulosPintados[indiceDuplicado] = new Rectangulo(this.x, this.y, 32, 32, new Color('F', 'F', 'F'));
-            }
+            }*/
         }
     } 
     else {
