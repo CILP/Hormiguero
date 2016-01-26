@@ -11,6 +11,9 @@ function Mapa(canvas, ancho, alto, contexto, cuadricula, colorCuadricula, tamano
     
     this.ancho = (ancho == null) ? 0 : ancho;
     this.alto = (alto == null) ? 0 : alto;
+    
+    // Evitamos referencias circulares
+    canvas = null;
 }
 
 Mapa.prototype.dibujarCuadricula = function(){
@@ -23,14 +26,20 @@ Mapa.prototype.dibujarCuadricula = function(){
         this.contexto.lineTo(y, this.ancho);
     }*/
     
-    for (var x = 0; x <= this.ancho; x += this.tamanoCelda) {
-        this.contexto.moveTo(x, 0);
-        this.contexto.lineTo(x, this.ancho);
+    // Dibujamos lineas horizontales
+    // Dibujamos lineas horizontales desde arriba (0) hasta abajo (480)(alto)
+    // pero usando como longitud de linea el ancho del canvas
+    for (var i = 0; i <= this.alto; i += this.tamanoCelda){
+        this.contexto.moveTo(0, i);
+        this.contexto.lineTo(this.ancho, i);
     }
     
-    for (var y = 0; y <= this.alto; y += this.tamanoCelda){
-        this.contexto.moveTo(0, y);
-        this.contexto.lineTo(this.alto, y);
+    // Dibujamos lineas verticales
+    // Dibujamos lineas verticales desde izquierda (0) hasta derecha (640)(ancho)
+    // pero usando como longitud de linea el alto del canvas
+    for (var i = 0; i <= this.ancho; i += this.tamanoCelda){
+        this.contexto.moveTo(i, 0);
+        this.contexto.lineTo(i, this.alto);
     }
     
     this.contexto.strokeStyle = this.colorCuadricula.valor();
