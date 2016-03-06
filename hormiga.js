@@ -98,6 +98,8 @@ Hormiga.prototype.changeColor = function() {
     }
 };
 
+// Reemplazar canvas por fondo.ancho
+// fondo.alto
 Hormiga.prototype.girar = function() {
   if (this.direccion === 0){
       // Mover arriba
@@ -109,14 +111,14 @@ Hormiga.prototype.girar = function() {
   else if (this.direccion === 1){
       // Mover derecha
 
-      if (this.x + (this.ancho * 2) < canvas.width){
+      if (this.x + (this.ancho * 2) < fondo.ancho){
           this.x = this.x + this.ancho;
       }
   }
   else if (this.direccion === 2){
       // Mover abajo
 
-      if (this.y + (this.ancho * 2) < canvas.height){
+      if (this.y + (this.ancho * 2) < fondo.alto){
           this.y = this.y + this.ancho;
       }
   }
@@ -184,6 +186,52 @@ Hormiga.prototype.moverOnMapa = function(){
         // celda.dibujarVecinos(this.contexto, [this.direccion])
     }
 
+};
+
+Hormiga.prototype.beta = function(contexto){
+  // Detectamos color
+  var color = this.detectarColor(contexto);
+  // Color Blanco #FFFFFF
+  // Color Negro #000000
+
+  // Seteamos la direccion
+  if (!this.direccion){
+      // Seteamos direccion hacia arriba
+      this.direccion = 0;
+  }
+
+  // Giramos
+  if (color === "#000000"){
+    this.pintar(contexto, "#FFF", false);
+    // Girar hacia izquierda
+    if (this.direccion === 0){
+        this.direccion = 3;
+    } else if  (this.direccion === 1){
+        this.direccion = 0;
+    } else if  (this.direccion === 2){
+        this.direccion = 1;
+    }  else if  (this.direccion === 3){
+        this.direccion = 2;
+    }
+    this.girar();
+    //color = "#FFF";
+  } else {
+    this.pintar(contexto, "#000", false);
+    // Girara hacia derecha
+    if (this.direccion === 0){
+        this.direccion = 1;
+    } else if  (this.direccion === 1){
+        this.direccion = 2;
+    } else if  (this.direccion === 2){
+        this.direccion = 3;
+    }  else if  (this.direccion === 3){
+        this.direccion = 0;
+    }
+    this.girar();
+    //color = "#000";
+  }
+
+  // return color;
 };
 
 Hormiga.prototype.mover = function(){
@@ -258,7 +306,7 @@ Hormiga.prototype.mover = function(){
 
 Hormiga.prototype.detectarColor = function(contexto){
   var data = contexto.getImageData(this.x, this.y, 1, 1).data;
-  console.info("Color detectado: " + rgbToHex(data[0], data[1], data[2]));
+  // console.info("Color detectado: " + rgbToHex(data[0], data[1], data[2]));
   return rgbToHex(data[0], data[1], data[2]);
 };
 
