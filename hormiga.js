@@ -6,6 +6,7 @@ function Hormiga(nombreHormiga, x, y, ancho, alto) {
     // Inicializacion de propiedades
     var nombreHormiga = (nombreHormiga == null) ? "Sin Nombre" : nombreHormiga;
     this.direccion = null;
+    this.ultimo = {x: 0, y: 0, ancho: this.ancho, alto: this.alto};
 }
 
 // Creamos el objeto Hormiga.prototype
@@ -13,9 +14,22 @@ Hormiga.prototype = Object.create(Rectangulo.prototype);
 
 Hormiga.prototype.constructor = Hormiga;
 
-Hormiga.prototype.pintar = function (contexto, color) {
+Hormiga.prototype.pintar = function (contexto, color, limpiar) {
+  if (this.ultimo.x !== this.x || this.ultimo.y !== this.y){
     contexto.fillStyle = color;
     contexto.fillRect(this.x, this.y, this.ancho, this.alto);
+
+    if (limpiar){
+      // #FFF
+      contexto.fillStyle = "#FFF";
+      contexto.fillRect(this.ultimo.x, this.ultimo.y, this.ultimo.ancho, this.ultimo.alto);
+    }
+
+    this.ultimo.x = this.x;
+    this.ultimo.y = this.y;
+    console.info("PINTADO");
+  }
+    //contexto.stroke();
 };
 
 Hormiga.prototype.setDireccion = function (dir){
@@ -241,3 +255,13 @@ Hormiga.prototype.mover = function(){
         this.girar();
     }
 };
+
+Hormiga.prototype.detectarColor = function(contexto){
+  var data = contexto.getImageData(this.x, this.y, 1, 1).data;
+  console.info("Color detectado: " + rgbToHex(data[0], data[1], data[2]));
+  return rgbToHex(data[0], data[1], data[2]);
+};
+
+function rgbToHex(r, g, b) {
+    return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+}
