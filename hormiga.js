@@ -20,7 +20,10 @@ Hormiga.prototype.pintar = function (contexto, color, limpiar) {
     contexto.fillRect(this.x, this.y, this.ancho, this.alto);
 
     if (limpiar){
-      contexto.fillStyle = "#FFF";
+      // Evitamos cambiar el estado si el estilo no ha cambiado
+      if (color !== "#FFF"){
+        contexto.fillStyle = "#FFF";
+      }
       contexto.fillRect(this.ultimo.x, this.ultimo.y, this.ultimo.ancho, this.ultimo.alto);
     }
 
@@ -94,7 +97,6 @@ Hormiga.prototype.mover = function(contexto){
         this.direccion = 2;
     }
     this.girar();
-    //color = "#FFF";
   } else {
     this.pintar(contexto, "#000", false);
     // Girara hacia derecha
