@@ -56,7 +56,9 @@ Mapa.prototype.dibujarRelleno = function(){
             var celda = new Rectangulo(x, y, this.tamanoCelda, this.tamanoCelda);
             renglonCeldas.push(celda);
 
-            this.contexto.fillStyle = celda.color;
+            if (this.contexto.style !== celda.color){
+                this.contexto.style = celda.color;
+            }
             this.contexto.fillRect(celda.x, celda.y, celda.ancho, celda.alto);
         }
 
@@ -75,7 +77,9 @@ Mapa.prototype.dibujarLinea = function(x1, y1, x2, y2, colorLinea){
 
     this.contexto.moveTo(x1, y1);
     this.contexto.lineTo(x2, y2);
-    this.contexto.strokeStyle = colorLinea;
+    if (this.contexto.strokeStyle !== colorLinea){
+      this.contexto.strokeStyle = colorLinea;
+    }
     this.contexto.stroke();
 };
 
