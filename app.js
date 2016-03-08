@@ -1,92 +1,50 @@
-var canvas = null;
-var contexto = null;
-var hormiga = null;
-var fondoMapa = null;
-var colorJugador = null;
-var cursor = null;
-var click = null;
-var hormigados = null;
-var x = null ,
-    y = null;
+// app.js
+// Carlos Linares
+var fondo,
+    frente,
+    hormiga,
+    dimensionHormiga;
 
-var listaHormigas = null;
-var hormigados = null;
-var dimensionHormiga = 4;
-var rectangulosPintados = null;
-var mapa = null;
-
-window.addEventListener('load', init, false);
-
-document.onmousemove = function(e) {
-    cursor.x = e.pageX;
-    cursor.y = e.pageY;
+function repaint(){
+  window.requestAnimationFrame(repaint);
+  hormiga.mover(fondo.contexto);
 }
 
-document.onmouseup = function(e) {
-    e = e || window.event;
-    var button = e.which || e.button;
-    click = button == 1;
-}
+window.addEventListener('load', function(){
+  // Se establecen valores de variables
+  dimensionHormiga = 8;
 
-function repaint() {
-    window.requestAnimationFrame(repaint);
+  // Se inican las capas
+  fondo = new Mapa(document.getElementById('fondo'), '2d', null, dimensionHormiga);
+  frente = new Mapa(document.getElementById('frente'), '2d', null, dimensionHormiga);
 
-    contexto.fillStyle = fondoMapa;
-    contexto.fillRect(0, 0, canvas.width, canvas.height);
+  // configCanvasListener();
 
-    hormiga.mover();
+  frente.dibujarCuadricula();
+  fondo.contexto.fillStyle = "#000";
+  fondo.contexto.fillRect(0, 0, fondo.ancho, fondo.alto);
 
-    for (var i = 0; i !== rectangulosPintados.length; i++){
-        contexto.fillStyle = rectangulosPintados[i].color;
-        contexto.fillRect(rectangulosPintados[i].x, rectangulosPintados[i].y, rectangulosPintados[i].ancho, rectangulosPintados[i].alto);
-    }
+  hormiga = new Hormiga('Alfa', frente.ancho / 2, frente.alto / 2, dimensionHormiga, dimensionHormiga);
 
-    hormiga.pintar(contexto, colorJugador);
+  repaint();
+}, false);
 
-    // Se dibuja la hormiga del cursor
-    contexto.fillStyle = "#f00";
-    contexto.fillRect(cursor.x - (dimensionHormiga / 2), cursor.y - (dimensionHormiga / 2), dimensionHormiga, dimensionHormiga);
+document.onmouseup = function(e){
+  e = e || window.event;
+  var boton = e.which || e.button;
+  return (boton == 1);
+};
 
+// TODO
+document.onmousemove = function(e){
+  // console.info({x: e.pageX, y: e.pageY});
+};
 
-    if (click){
-        click = false;
-        listaHormigas.push(new Hormiga('Beta', cursor.x, cursor.y, dimensionHormiga, dimensionHormiga));
-    }
-
-    for (var i = 0; i !==  listaHormigas.length; i++){
-        listaHormigas[i].mover();
-        listaHormigas[i].pintar(contexto, colorJugador);
-    }
-
-    // mapa.dibujarCuadricula();
-}
-
-function init() {
-    cursor = { x : 0, y : 0 };
-    click = false;
-
-    canvas = document.getElementById('canvas');
-    contexto = canvas.getContext('2d');
-
-    rectangulosPintados = [];
-    listaHormigas = [];
-
-    x = canvas.width / 2;
-    y = canvas.height / 2;
-
-    mapa = new Mapa(document.getElementById('canvas'), '2d', null, dimensionHormiga);
-    // mapa.dibujarRelleno();
-    // mapa.dibujarCuadricula();
-    //mapa.setVecinos();
-    hormiga = new Hormiga('Alfa', x, y, dimensionHormiga, dimensionHormiga);
-
-    fondoMapa = new Color('0', '0', '0').valor();
-    colorJugador = new Color('F', '0', '0').valor();
-    repaint();
-}
-
-function random(maximo){
-    return Math.floor(Math.random() * maximo);
+// TODO
+function configCanvasListener(){
+  // frente.canvas.addEventListener('mousemove', function(e){
+  //   console.info({x: e.pageX, y: e.pageY});
+  // });
 }
 
 window.requestAnimationFrame = (function () {

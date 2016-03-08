@@ -4,13 +4,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
     <meta charset="utf-8" />
+
     <script type="text/javascript" src="color.js"></script>
     <script type="text/javascript" src="rectangulo.js"></script>
     <script type="text/javascript" src="hormiga.js"></script>
     <script type="text/javascript" src="mapa.js"></script>
     <script type="text/javascript" src="app.js"></script>
   </head>
-  <body onload="init();">
-    <canvas id="canvas" style="background-color:aliceblue;" width="800px" height="640px"></canvas>
+  <body>
+    <canvas id="fondo" style="position: absolute; z-index: 0;" width="640px" height="480px"></canvas>
+    <canvas id="frente" style="position: absolute; z-index: 1;" width="640px" height="480px"></canvas>
   </body>
 </html>
