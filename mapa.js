@@ -5,7 +5,7 @@
 function Mapa(canvas, contexto, colorCuadricula, tamanoCelda){
 
     this.canvas = (canvas == null) ? null : canvas;
-    this.colorCuadricula = (colorCuadricula == null) ? new Color('F', '0', 'F') : colorCuadricula;
+    this.colorCuadricula = (colorCuadricula == null) ? "#5E2750" : colorCuadricula;
     this.contexto = (this.canvas == null) ? null : canvas.getContext(contexto);
     this.tamanoCelda = (tamanoCelda == null) ? 32 : tamanoCelda;
 
@@ -44,7 +44,7 @@ Mapa.prototype.dibujarCuadricula = function(){
         this.contexto.lineTo(i, this.alto);
     }
 
-    this.contexto.strokeStyle = this.colorCuadricula.valor();
+    this.contexto.strokeStyle = this.colorCuadricula;
     this.contexto.stroke();
 };
 
