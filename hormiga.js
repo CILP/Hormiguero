@@ -16,15 +16,14 @@ Hormiga.prototype.constructor = Hormiga;
 
 Hormiga.prototype.pintar = function (contexto, color, limpiar) {
   if (this.ultimo.x !== this.x || this.ultimo.y !== this.y){
-    contexto.fillStyle = color;
+    if (contexto.fillStyle !== color){
+      contexto.fillStyle = color;
+    }
     contexto.fillRect(this.x, this.y, this.ancho, this.alto);
 
     if (limpiar){
-      // Evitamos cambiar el estado si el estilo no ha cambiado
-      if (color !== "#FFF"){
-        contexto.fillStyle = "#FFF";
-      }
-      contexto.fillRect(this.ultimo.x, this.ultimo.y, this.ultimo.ancho, this.ultimo.alto);
+      // Dibujamos un rectangulo transparente
+      contexto.clearRect(this.ultimo.x, this.ultimo.y, this.ultimo.ancho, this.ultimo.alto);
     }
 
     this.ultimo.x = this.x;

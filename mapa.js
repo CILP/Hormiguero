@@ -70,6 +70,10 @@ Mapa.prototype.limpiar = function(){
     this.contexto.clearRect(0, 0, this.ancho, this.alto);
 };
 
+Mapa.prototype.limpiarSeccion = function(x, y, ancho, alto){
+  this.contexto.clearRect(x, y, ancho, alto);
+};
+
 Mapa.prototype.dibujarLinea = function(x1, y1, x2, y2, colorLinea){
 
     // Si colorLinea no se encuentra establecido se toma el default de this.color
