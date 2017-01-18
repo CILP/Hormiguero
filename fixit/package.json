@@ -1,0 +1,16 @@
+{
+  "name": "fixit",
+  "version": "1.0.0",
+  "description": "Landing page for Fixit Startup",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Fixit",
+    "JS",
+    "SASS"
+  ],
+  "author": "Carlos Linares",
+  "license": "MIT"
+}
