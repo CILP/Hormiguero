@@ -1,0 +1,29 @@
+{
+  "name": "mail-service",
+  "version": "1.0.0",
+  "description": "mail service subscriptions",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/Faamigo/mail-service.git"
+  },
+  "keywords": [
+    "nodejs",
+    "mails"
+  ],
+  "author": "Carlos Linares",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://gitlab.com/Faamigo/mail-service/issues"
+  },
+  "homepage": "https://gitlab.com/Faamigo/mail-service#README",
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "mongoose": "^4.6.3"
+  }
+}

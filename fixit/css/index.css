@@ -47,3 +47,50 @@ header div:nth-child(1) img {
 header div ~ div span {
     font-size: 0.7em;
 }
+
+section {
+    height: 100vh;
+    background-color: #fefefd;
+}
+
+section div:nth-child(1) {
+    padding: 10vh 0;
+    text-align: center;
+}
+
+section div:nth-child(1) span {
+    color: #010102;
+    font-size: 2.5em;
+}
+
+section div:last-child {
+    display: flex;
+}
+
+article {
+    text-align: center;
+}
+
+article div p {
+    margin: 0 auto;
+    font-size: 1.3em;
+}
+
+article div:first-child span {
+    color: rgb(249, 179, 112);
+}
+
+article div:nth-child(1) {
+    padding: 5vh 0;
+}
+
+article div:nth-child(2) {
+    padding: 0 5vw 5vh 5vw;
+}
+
+@media screen and (max-width: 500px){
+    
+    section {
+        background-color: red;
+    }
+}
