@@ -49,12 +49,12 @@ header div ~ div span {
 }
 
 section {
-    height: 100vh;
+    height: auto;
     background-color: #fefefd;
 }
 
 section div:nth-child(1) {
-    padding: 10vh 0;
+    padding: 10vh 5vw 5vh 5vw;
     text-align: center;
 }
 
@@ -65,6 +65,48 @@ section div:nth-child(1) span {
 
 section div:last-child {
     display: flex;
+    flex-direction: column;
+}
+
+section div form {
+    margin-top: 5vh;
+}
+
+section div form label {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: rgb(249, 179, 112);
+}
+
+section div form input {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom-width: 2px;
+    border-bottom-color: rgb(249, 179, 112);
+    font-size: 1.2em;
+    width: 100%;
+    outline: none;
+    box-shadow: none;
+
+    margin-top: 1em;
+    margin-bottom: 2em;
+}
+
+section div form button {
+     background-color: white;
+    border-color: rgb(249, 179, 112);
+    outline: none;
+    box-shadow: none;
+    color: rgb(249, 179, 112);
+    border-width: 2px;
+    border-style: solid;
+    width: 20vw;
+    font-size: 1.5em;
+}
+
+section div form button:hover {
+    border-color: rgb(249, 179, 112, 1);
 }
 
 article {
@@ -81,16 +123,29 @@ article div:first-child span {
 }
 
 article div:nth-child(1) {
-    padding: 5vh 0;
+    padding: 2vh 5vw;
 }
 
 article div:nth-child(2) {
     padding: 0 5vw 5vh 5vw;
 }
 
-@media screen and (max-width: 500px){
-    
-    section {
-        background-color: red;
+@media screen and (max-width: 768px){
+
+    /*
+    section div:last-child {
+        display: flex;
+        flex-direction: column;
+    }*/
+
+    section div:nth-child(1) span {
+        font-size: 2em;
     }
+
+    /*
+    article {
+        text-align: center;
+        width: 100vw;
+    }*/
+
 }
